@@ -5,3 +5,6 @@
 html {
   background: white;
 }
+.active {
+  color: #4acdd5;
+}
