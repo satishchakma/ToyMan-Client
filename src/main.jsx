@@ -10,12 +10,19 @@ import Blogs from "./components/Blogs.jsx";
 import Login from "./user credentials/Login.jsx";
 import Register from "./user credentials/Register.jsx";
 import AuthProviders from "./providers/AuthProviders.jsx";
+import Home from "./components/Home.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
