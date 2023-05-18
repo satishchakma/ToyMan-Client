@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -37,6 +42,16 @@ const Register = () => {
         // setError(error.message);
       });
     form.reset();
+  };
+
+  const handleChangePassword = (event) => {
+    setPassword(event.target.value);
+
+    if (event.target.value.length < 6) {
+      setError("Please enter at least 6 characters");
+    } else if (event.target.value.length >= 6) {
+      setError("");
+    }
   };
   return (
     <div>
@@ -76,12 +91,15 @@ const Register = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input
+                    onChange={handleChangePassword}
+                    value={password}
                     type="password"
                     placeholder="password"
                     className="input input-bordered"
                     name="password"
                     required
                   />
+                  <p className="text-[#d70e0e]">{error}</p>
                   <label className="label">
                     <span className="label-text">Photo URL</span>
                   </label>
@@ -91,6 +109,7 @@ const Register = () => {
                     className="input input-bordered"
                     name="photoURL"
                   />
+
                   <label className="label">
                     <Link
                       to="/login"

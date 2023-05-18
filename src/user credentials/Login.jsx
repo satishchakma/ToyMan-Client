@@ -1,10 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn, setUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -18,14 +20,26 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        // setUser(loggedUser);
+        setUser(loggedUser);
         // navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
-        // setError(error.message);
+        setError(error.message);
       });
     form.reset();
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        setUser(loggedInUser);
+        // navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
@@ -60,6 +74,7 @@ const Login = () => {
                   name="password"
                   required
                 />
+                <p className="text-[#d70e0e]">{error}</p>
                 <label className="label">
                   <Link
                     to="/register"
@@ -79,7 +94,7 @@ const Login = () => {
 
             <p className="text-center">OR</p>
             <div
-              //   onClick={handleGoogleSignIn}
+              onClick={handleGoogleSignIn}
               className="m-4 btn-primary btn text-center flex justify-center items-center gap-4"
             >
               <div className="p-3">{/* <FcGoogle /> */}</div>
