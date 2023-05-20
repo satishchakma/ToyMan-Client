@@ -8,12 +8,18 @@ import CategoryData from "./CategoryData";
 
 const Categories = () => {
   const [toys, setToys] = useState([]);
+  const [category, setCategory] = useState(3);
 
   useEffect(() => {
-    fetch("http://localhost:5001/toys")
+    fetch(`http://localhost:5001/category/${category}`)
       .then((res) => res.json())
       .then((data) => setToys(data));
-  }, []);
+  }, [category]);
+
+  const handleCategory = (cat) => {
+    console.log(cat);
+    setCategory(cat);
+  };
 
   return (
     <div className="container mx-auto text-center">
@@ -27,9 +33,9 @@ const Categories = () => {
           <TabPanel>
             <Tabs forceRenderTabPanel>
               <TabList>
-                <Tab>Teddy Bears</Tab>
-                <Tab>Dog Toys</Tab>
-                <Tab>Cat Toys</Tab>
+                <Tab onClick={() => handleCategory(1)}>Teddy Bears</Tab>
+                <Tab onClick={() => handleCategory(2)}>Dog Toys</Tab>
+                <Tab onClick={() => handleCategory(3)}>Cat Toys</Tab>
               </TabList>
               {/* <TabPanel>
                 <p>Husband of Marge; father of Bart, Lisa, and Maggie.</p>
@@ -43,8 +49,16 @@ const Categories = () => {
                   <CategoryData key={toy.id}></CategoryData>
                 ))}
               </TabPanel>
-              <TabPanel></TabPanel>
-              <TabPanel></TabPanel>
+              <TabPanel>
+                {toys.map((toy) => (
+                  <CategoryData key={toy.id}></CategoryData>
+                ))}
+              </TabPanel>
+              <TabPanel>
+                {toys.map((toy) => (
+                  <CategoryData key={toy.id}></CategoryData>
+                ))}
+              </TabPanel>
             </Tabs>
           </TabPanel>
         </Tabs>
