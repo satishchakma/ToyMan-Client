@@ -5,28 +5,64 @@ import AllToyDetails from "./AllToyDetails";
 
 const AllToys = () => {
   const [toys, setToys] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5001/toys")
       .then((res) => res.json())
-      .then((data) => setToys(data));
-  });
+      .then((data) => {
+        setToys(data);
+      });
+  }, []);
+  // useEffect(() => {
+  //   searchItems(searchTerm);
+  // }, [searchTerm]);
 
-  const handlesearch = () => {
-    event.preventDefault();
-    const form = event.target;
-    const searchValue = form.search.value;
-    console.log(searchValue);
+  const handlesearch = (event) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
+    // Perform search logic here, such as making an API call or filtering data
+    console.log("Searching for:", event.target.value);
+    // searchItems(event.target.value);
   };
+  const searchItems = (term) => {
+    console.log("term", term);
+    fetch(`http://localhost:5001/toys/search/${term}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setToys(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  useEffect(() => {
+    if (searchTerm.trim() !== "") {
+      fetch(`http://localhost:5001/toys/search/${searchTerm}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setToys(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      fetch("http://localhost:5001/toys")
+        .then((res) => res.json())
+        .then((data) => setToys(data));
+    }
+  }, [searchTerm]);
+
   return (
     <div className="container mx-auto my-12">
       <div className="search w-full flex my-8">
         <div className="w-1/2"></div>
-        <form onChange={() => handlesearch()} className="w-1/2 form-control ">
+        <form className="w-1/2 form-control ">
           <div className="input-group flex justify-end items-end ">
             <input
               type="text"
               name="search"
+              onChange={handlesearch}
               placeholder="Search by Toy name..."
               className="input input-bordered"
             />
