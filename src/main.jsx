@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "/singleDataDetails",
+        path: "/singleDataDetails/:id",
         element: (
           <PrivateRoute>
             <SingleCategoryDataDetails></SingleCategoryDataDetails>

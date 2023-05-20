@@ -9,7 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SingleCategoryData = (props) => {
-  const { photo, name, price, toyRating } = props.toy;
+  const { photo, name, price, toyRating, _id } = props.toy;
+  //   console.log(_id);
   const { user } = useContext(AuthContext);
 
   const handlePrivateRoute = () => {
@@ -46,7 +47,10 @@ const SingleCategoryData = (props) => {
               />
             ))}
           </div>
-          <Link to="/singleDataDetails" className="card-actions justify-start">
+          <Link
+            to={`/singleDataDetails/${_id}`}
+            className="card-actions justify-start"
+          >
             <button
               onClick={() => handlePrivateRoute()}
               className="btn btn-accent text-white"
