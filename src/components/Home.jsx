@@ -1,4 +1,5 @@
 import React from "react";
+import Categories from "./Categories";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <HeroSection></HeroSection>
       <GallerySection></GallerySection>
+      <Categories></Categories>
     </div>
   );
 };

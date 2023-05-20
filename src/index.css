@@ -92,3 +92,11 @@ h2 {
   -ms-transform: scale(1.07, 1.07);
   transform: scale(1.07, 1.07);
 }
+
+.star {
+  transition: color 0.2s ease-in-out;
+}
+
+.star.selected {
+  color: gold;
+}
