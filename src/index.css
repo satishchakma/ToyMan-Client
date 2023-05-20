@@ -100,3 +100,8 @@ h2 {
 .star.selected {
   color: gold;
 }
+.categories img {
+  height: 384px;
+  object-fit: cover;
+  width: 100%;
+}

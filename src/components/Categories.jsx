@@ -8,7 +8,7 @@ import CategoryData from "./CategoryData";
 
 const Categories = () => {
   const [toys, setToys] = useState([]);
-  const [category, setCategory] = useState(3);
+  const [category, setCategory] = useState(1);
 
   useEffect(() => {
     fetch(`http://localhost:5001/category/${category}`)
@@ -45,19 +45,13 @@ const Categories = () => {
                 />
               </TabPanel> */}
               <TabPanel>
-                {toys.map((toy) => (
-                  <CategoryData key={toy.id}></CategoryData>
-                ))}
+                <CategoryData toys={toys}></CategoryData>
               </TabPanel>
               <TabPanel>
-                {toys.map((toy) => (
-                  <CategoryData key={toy.id}></CategoryData>
-                ))}
+                <CategoryData toys={toys}></CategoryData>
               </TabPanel>
               <TabPanel>
-                {toys.map((toy) => (
-                  <CategoryData key={toy.id}></CategoryData>
-                ))}
+                <CategoryData toys={toys}></CategoryData>
               </TabPanel>
             </Tabs>
           </TabPanel>

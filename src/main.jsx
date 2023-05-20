@@ -12,6 +12,8 @@ import Register from "./user credentials/Register.jsx";
 import AuthProviders from "./providers/AuthProviders.jsx";
 import Home from "./components/Home.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import SingleCategoryDataDetails from "./components/SingleCategoryDataDetails.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/singleDataDetails",
+        element: (
+          <PrivateRoute>
+            <SingleCategoryDataDetails></SingleCategoryDataDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
