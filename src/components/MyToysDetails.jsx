@@ -2,9 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProviders";
+
 const MyToysDetails = (props) => {
   const singleToy = props.toy;
   const { _id, setDetails, details } = props.toy;
+
+  const { user } = useContext(AuthContext);
 
   const handleDelete = (_id) => {
     console.log(_id);
@@ -33,6 +42,23 @@ const MyToysDetails = (props) => {
       }
     });
   };
+
+  const handleUpdate = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/updateJob/${data._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.modifiedCount > 0) {
+          //    setControl(!control);
+          alert("updated successfully");
+        }
+        console.log(result);
+      });
+  };
   return (
     <tr>
       <td>
@@ -60,9 +86,90 @@ const MyToysDetails = (props) => {
       <td>{singleToy.quantity}</td>
 
       <th>
-        <Link to={`/singleDataDetails/${_id}`}>
-          <button className="btn btn-warning text-white btn-xs">Update</button>
-        </Link>
+        <label
+          htmlFor="my-modal-4"
+          className="btn btn-warning text-white btn-xs"
+        >
+          Update
+        </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <label htmlFor="my-modal-4" className="modal cursor-pointer">
+          <label className="modal-box relative w-full max-w-5xl" htmlFor="">
+            {/* inside modal  */}
+            <div>
+              <div>
+                <div className="hero min-h-screen bg-base-200">
+                  <div className="hero-content flex-col lg:flex-row-reverse w-full">
+                    <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-[#f3f3f3]">
+                      <form
+                        onSubmit={() => handleUpdate(_id)}
+                        className="card-body"
+                      >
+                        <div className="form-control">
+                          <h1 className="text-4xl text-center my-3">
+                            Update A Toy
+                          </h1>
+                          <p className="text-center mb-3">
+                            Please update a toy using the details bellow.
+                          </p>
+
+                          <label className="label">
+                            <span className="label-text">Price</span>
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="Price $"
+                            className="input input-bordered"
+                            name="price"
+                          />
+
+                          <label className="label">
+                            <span className="label-text">
+                              Available quantity
+                            </span>
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="Available quantity "
+                            className="input input-bordered"
+                            name="quantity"
+                          />
+                          <label className="label">
+                            <span className="label-text">
+                              Detail description
+                            </span>
+                          </label>
+                          <textarea name="details" className="h-24"></textarea>
+                        </div>
+
+                        <div className="form-control mt-6">
+                          <button className="btn bg-[#4acdd5] border-none w-1/2 rounded-full">
+                            Update
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+              {/* Same as */}
+              <ToastContainer />
+            </div>
+          </label>
+        </label>
       </th>
       <th>
         <button
@@ -72,6 +179,11 @@ const MyToysDetails = (props) => {
           Delete
         </button>
       </th>
+      {/* modal here */}
+      {/* The button to open modal */}
+      {/* <label htmlFor="my-modal-4" className="btn">
+        open modal
+      </label> */}
     </tr>
   );
 };
