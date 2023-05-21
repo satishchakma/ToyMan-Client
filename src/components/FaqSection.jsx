@@ -48,8 +48,8 @@ const FaqSection = () => {
     <div className="my-12 container mx-auto text-black">
       <h1 className="text-5xl text-center my-8">Frequently Asked Questions</h1>
       <p className="text-center my-5">Find your answer from here</p>
-      <div className="flex gap-5 items-center">
-        <div className="w-1/2">
+      <div className="lg:flex gap-5 items-center">
+        <div className="lg:w-1/2 w-full p-4">
           <div>
             <img
               src={
@@ -58,7 +58,7 @@ const FaqSection = () => {
             ></img>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2 w-full p-4">
           <Faq data={data} styles={styles} config={config} />
         </div>
       </div>

@@ -100,7 +100,7 @@ const Login = () => {
             <p className="text-center">OR</p>
             <div
               onClick={handleGoogleSignIn}
-              className="m-4 btn-primary btn text-center flex justify-center items-center gap-4"
+              className="m-4 bg-[#14b8a6] border-0 btn text-center flex justify-center items-center gap-4"
             >
               <div className="p-3">{/* <FcGoogle /> */}</div>
               <h3>Continue with Google</h3>

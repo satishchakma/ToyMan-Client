@@ -21,9 +21,9 @@ const Navbar = () => {
     // desktop menubar
     <div>
       <div className="navbar bg-base-100 container mx-auto my-6">
-        <div className="flex-1">
+        <NavLink to={`/`} className="flex-1">
           <img src={logo} alt="" />
-        </div>
+        </NavLink>
         <div className="gap-5 mr-5 text-lg">
           <NavLink
             to={`/`}
@@ -37,18 +37,22 @@ const Navbar = () => {
           >
             All Toys
           </NavLink>
-          <NavLink
-            to={`/mytoys/`}
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            My Toys
-          </NavLink>
-          <NavLink
-            to={`/addatoy`}
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Add A Toy
-          </NavLink>
+          {user && (
+            <NavLink
+              to={`/mytoys/`}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              My Toys
+            </NavLink>
+          )}
+          {user && (
+            <NavLink
+              to={`/addatoy`}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Add A Toy
+            </NavLink>
+          )}
           <NavLink
             to={`/blogs`}
             className={({ isActive }) => (isActive ? "active" : "")}
@@ -57,25 +61,52 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <div className="mr-4">
+        {/* <div className="mr-4">
           {user?.photoURL ? (
             <div className="avatar">
-              <div className=" w-12 rounded-full ">
+              <div
+                className=" w-12 rounded-full tooltip tooltip-open "
+                data-tip="hello"
+              >
                 <img
-                  className="tooltip tooltip-open tooltip-bottom tooltip-error"
+                  className="tooltip tooltip-open"
                   data-tip={user?.displayName}
                   src={user?.photoURL}
                 />
               </div>
             </div>
           ) : (
-            <div className="avatar">
+            <div className="avatar tooltip" data-tip="hello">
               <div className="w-12 rounded-full">
                 <UserCircleIcon />
               </div>
             </div>
           )}
-        </div>
+        </div> */}
+        {user && (
+          <div>
+            <div className="dropdown dropdown-end items-center mx-4">
+              <label tabIndex={0} className="my-avatar ">
+                <div className="w-10 rounded-full">
+                  {user?.photoURL ? (
+                    <div className="tooltip" data-tip={user?.displayName}>
+                      <img className="mask mask-circle" src={user?.photoURL} />
+                    </div>
+                  ) : (
+                    <div
+                      className="avatar tooltip"
+                      data-tip={user?.displayName}
+                    >
+                      <div className="w-12 rounded-full">
+                        <UserCircleIcon />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </label>
+            </div>
+          </div>
+        )}
 
         <div>
           {user ? (

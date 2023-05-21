@@ -7,7 +7,7 @@ const CategoryData = (props) => {
   const myToys = props.toys;
   //   console.log(myToys);
   return (
-    <div className="grid grid-cols-3 gap-5 my-6 categories">
+    <div className="grid lg:grid-cols-3 gap-5 my-6 categories">
       {myToys.map((toy) => (
         <SingleCategoryData toy={toy}></SingleCategoryData>
       ))}
