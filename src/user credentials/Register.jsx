@@ -5,8 +5,10 @@ import { AuthContext } from "../providers/AuthProviders";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import useTitle from "../hooks/usetitle";
 
 const Register = () => {
+  useTitle("Register");
   const { createUser } = useContext(AuthContext);
 
   const [error, setError] = useState("");

@@ -1,6 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const UpdateModal = (props) => {
   const { _id, price, quantity, details } = props;
 
@@ -22,7 +25,7 @@ const UpdateModal = (props) => {
     console.log(updatedToy);
 
     // send data to the server
-    fetch(`http://localhost:5001/toy/${_id}`, {
+    fetch(`https://toyman-server.vercel.app/toy/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -33,13 +36,16 @@ const UpdateModal = (props) => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
-          //   Swal.fire({
-          //     title: "Success!",
-          //     text: "Coffee Updated Successfully",
-          //     icon: "success",
-          //     confirmButtonText: "Cool",
-          //   });
-          alert("data updated successfully");
+          toast.success("🦄 Product data updated!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       });
   };
@@ -113,6 +119,20 @@ const UpdateModal = (props) => {
           </div>
         </label>
       </label>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 };

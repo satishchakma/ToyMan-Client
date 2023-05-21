@@ -1,6 +1,10 @@
 import React from "react";
 
 import Faq from "react-faq-component";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 
 const FaqSection = () => {
   const data = {
@@ -45,7 +49,13 @@ const FaqSection = () => {
     // tabFocus: true
   };
   return (
-    <div className="my-12 container mx-auto text-black">
+    <div
+      data-aos="flip-left"
+      data-aos-offset="200"
+      data-aos-easing="ease-in-sine"
+      data-aos-duration="600"
+      className="my-12 container mx-auto text-black"
+    >
       <h1 className="text-5xl text-center my-8">Frequently Asked Questions</h1>
       <p className="text-center my-5">Find your answer from here</p>
       <div className="lg:flex gap-5 items-center">

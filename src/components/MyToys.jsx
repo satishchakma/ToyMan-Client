@@ -8,15 +8,17 @@ import { AuthContext } from "../providers/AuthProviders";
 import { FidgetSpinner } from "react-loader-spinner";
 import MyToysDetails from "./MyToysDetails";
 import UpdateModal from "./UpdateModal";
+import useTitle from "../hooks/usetitle";
 
 const MyToys = () => {
+  useTitle("My Toys");
   const { user, loading } = useContext(AuthContext);
 
   const [details, setDetails] = useState([]);
   const [view, setView] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/toys/${user?.email}&${view}`)
+    fetch(`https://toyman-server.vercel.app/toys/${user?.email}&${view}`)
       .then((res) => res.json())
       .then((data) => setDetails(data));
   }, [user, details]);

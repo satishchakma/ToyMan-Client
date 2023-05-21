@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useTitle from "../hooks/usetitle";
 
 const AddAToy = () => {
+  useTitle("Add a toy");
   const { user } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = useState("");
   const [rating, setRating] = useState(0);
@@ -53,7 +55,7 @@ const AddAToy = () => {
     console.log(newToy);
 
     // send data to the server
-    fetch("http://localhost:5001/toys", {
+    fetch("https://toyman-server.vercel.app/toys", {
       method: "POST",
       headers: {
         "content-type": "application/json",

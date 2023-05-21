@@ -1,8 +1,18 @@
 import React from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 
 const GallerySection = () => {
   return (
-    <div className="my-12 p-2 gallery">
+    <div
+      className="my-12 p-2 gallery"
+      data-aos="fade-zoom-in"
+      data-aos-offset="200"
+      data-aos-easing="ease-in-sine"
+      data-aos-duration="600"
+    >
       <h2 className="text-center text-5xl mb-10  leading-snug">
         We design toys not just for kids <br /> but with kids
       </h2>

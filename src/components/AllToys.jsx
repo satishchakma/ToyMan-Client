@@ -1,14 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import useTitle from "../hooks/usetitle";
 import AllToyDetails from "./AllToyDetails";
 
 const AllToys = () => {
+  useTitle("All Toys");
   const [toys, setToys] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5001/toys")
+    fetch("https://toyman-server.vercel.app/toys")
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -27,7 +29,7 @@ const AllToys = () => {
   };
   const searchItems = (term) => {
     console.log("term", term);
-    fetch(`http://localhost:5001/toys/search/${term}`)
+    fetch(`https://toyman-server.vercel.app/toys/search/${term}`)
       .then((response) => response.json())
       .then((data) => {
         setToys(data);
@@ -38,7 +40,7 @@ const AllToys = () => {
   };
   useEffect(() => {
     if (searchTerm.trim() !== "") {
-      fetch(`http://localhost:5001/toys/search/${searchTerm}`)
+      fetch(`https://toyman-server.vercel.app/toys/search/${searchTerm}`)
         .then((response) => response.json())
         .then((data) => {
           setToys(data);
@@ -47,7 +49,7 @@ const AllToys = () => {
           console.error(error);
         });
     } else {
-      fetch("http://localhost:5001/toys")
+      fetch("https://toyman-server.vercel.app/toys")
         .then((res) => res.json())
         .then((data) => setToys(data));
     }

@@ -11,7 +11,7 @@ const SingleCategoryDataDetails = () => {
   console.log(dataId);
   const [details, setDetails] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5001/toy/${dataId.id}`)
+    fetch(`https://toyman-server.vercel.app/toy/${dataId.id}`)
       .then((res) => res.json())
       .then((data) => setDetails(data));
   }, []);

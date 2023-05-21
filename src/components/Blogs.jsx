@@ -1,7 +1,9 @@
 import React from "react";
 import Faq from "react-faq-component";
+import useTitle from "../hooks/usetitle";
 
 const Blogs = () => {
+  useTitle("Blogs");
   const data = {
     rows: [
       {
