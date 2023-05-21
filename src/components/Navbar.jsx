@@ -38,7 +38,7 @@ const Navbar = () => {
             All Toys
           </NavLink>
           <NavLink
-            to={`/mytoys/${userMail}`}
+            to={`/mytoys/`}
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             My Toys

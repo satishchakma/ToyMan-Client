@@ -6,17 +6,18 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 
 import { FidgetSpinner } from "react-loader-spinner";
+import MyToysDetails from "./MyToysDetails";
 
 const MyToys = () => {
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5001/toys/${user?.email}`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, [user]);
+      .then((data) => setDetails(data));
+  }, [user, details]);
   if (loading) {
     return (
       <div className="flex justify-center">
@@ -51,9 +52,14 @@ const MyToys = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {toys.map((toy) => (
-              <AllToyDetails toy={toy} key={toy._id}></AllToyDetails>
-            ))} */}
+            {details.map((toy) => (
+              <MyToysDetails
+                toy={toy}
+                key={toy._id}
+                details={details}
+                setDetails={setDetails}
+              ></MyToysDetails>
+            ))}
           </tbody>
           {/* foot */}
           <tfoot>
