@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -8,12 +8,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
+import { useEffect } from "react";
 
 const MyToysDetails = (props) => {
   const singleToy = props.toy;
-  const { _id, setDetails, details } = props.toy;
+  const { _id, setDetails, details, price } = props.toy;
 
   const { user } = useContext(AuthContext);
+
+  const [updateData, setUpdateData] = useState({});
+  const [updateId, setUpdateId] = useState("");
 
   const handleDelete = (_id) => {
     console.log(_id);
@@ -43,22 +47,21 @@ const MyToysDetails = (props) => {
     });
   };
 
+  useEffect(() => {
+    fetch(`http://localhost:5001/toy/${updateId}`)
+      .then((res) => res.json())
+      .then((data) => setUpdateData(data));
+  }, [updateId, updateData]);
+
+  const sendId = (id) => {
+    handleUpdate(id);
+    setUpdateId(id);
+  };
+
   const handleUpdate = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/updateJob/${data._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.modifiedCount > 0) {
-          //    setControl(!control);
-          alert("updated successfully");
-        }
-        console.log(result);
-      });
   };
+
   return (
     <tr>
       <td>
@@ -88,10 +91,12 @@ const MyToysDetails = (props) => {
       <th>
         <label
           htmlFor="my-modal-4"
+          onClick={() => sendId(_id)}
           className="btn btn-warning text-white btn-xs"
         >
           Update
         </label>
+        {/* modal here */}
         {/* Put this part before </body> tag */}
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
         <label htmlFor="my-modal-4" className="modal cursor-pointer">
@@ -122,6 +127,7 @@ const MyToysDetails = (props) => {
                             placeholder="Price $"
                             className="input input-bordered"
                             name="price"
+                            defaultValue={updateData?.price}
                           />
 
                           <label className="label">
