@@ -1,6 +1,38 @@
 import React from "react";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProviders";
+
+import { FidgetSpinner } from "react-loader-spinner";
 
 const MyToys = () => {
+  const { user, loading, setLoading } = useContext(AuthContext);
+
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5001/toys/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, [user]);
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <FidgetSpinner
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+          ballColors={["#ff0000", "#00ff00", "#0000ff"]}
+          backgroundColor="#F4442E"
+        />
+      </div>
+    );
+  }
   return (
     <div className="container mx-auto my-12">
       <div className="overflow-x-auto w-full">

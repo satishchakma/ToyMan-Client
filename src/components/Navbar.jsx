@@ -8,6 +8,8 @@ import { AuthContext } from "../providers/AuthProviders";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   //console.log(user);
+  const userMail = user?.email;
+  console.log(userMail);
 
   const handleLogOut = () => {
     logOut()
@@ -36,7 +38,7 @@ const Navbar = () => {
             All Toys
           </NavLink>
           <NavLink
-            to={`/mytoys`}
+            to={`/mytoys/${userMail}`}
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             My Toys
