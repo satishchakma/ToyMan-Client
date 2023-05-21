@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllToyDetails = (props) => {
   const singleToy = props.toy;
+  const { _id } = props.toy;
+  //console.log(_id);
 
   return (
     <tr>
@@ -36,9 +39,11 @@ const AllToyDetails = (props) => {
       <td>{singleToy.quantity}</td>
 
       <th>
-        <button className="btn btn-accent text-white btn-xs">
-          View details
-        </button>
+        <Link to={`/singleDataDetails/${_id}`}>
+          <button className="btn btn-accent text-white btn-xs">
+            View details
+          </button>
+        </Link>
       </th>
     </tr>
   );
