@@ -9,15 +9,13 @@ import { faCoffee, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import { useEffect } from "react";
+import UpdateModal from "./UpdateModal";
 
 const MyToysDetails = (props) => {
   const singleToy = props.toy;
-  const { _id, setDetails, details, price } = props.toy;
+  const { _id, setDetails, details, price, quantity } = props.toy;
 
   const { user } = useContext(AuthContext);
-
-  const [updateData, setUpdateData] = useState({});
-  const [updateId, setUpdateId] = useState("");
 
   const handleDelete = (_id) => {
     console.log(_id);
@@ -45,21 +43,6 @@ const MyToysDetails = (props) => {
           });
       }
     });
-  };
-
-  useEffect(() => {
-    fetch(`http://localhost:5001/toy/${updateId}`)
-      .then((res) => res.json())
-      .then((data) => setUpdateData(data));
-  }, [updateId, updateData]);
-
-  const sendId = (id) => {
-    handleUpdate(id);
-    setUpdateId(id);
-  };
-
-  const handleUpdate = (id) => {
-    console.log(id);
   };
 
   return (
@@ -90,92 +73,18 @@ const MyToysDetails = (props) => {
 
       <th>
         <label
-          htmlFor="my-modal-4"
+          htmlFor={`${_id}`}
           onClick={() => sendId(_id)}
           className="btn btn-warning text-white btn-xs"
         >
           Update
         </label>
-        {/* modal here */}
-        {/* Put this part before </body> tag */}
-        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-        <label htmlFor="my-modal-4" className="modal cursor-pointer">
-          <label className="modal-box relative w-full max-w-5xl" htmlFor="">
-            {/* inside modal  */}
-            <div>
-              <div>
-                <div className="hero min-h-screen bg-base-200">
-                  <div className="hero-content flex-col lg:flex-row-reverse w-full">
-                    <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-[#f3f3f3]">
-                      <form
-                        onSubmit={() => handleUpdate(_id)}
-                        className="card-body"
-                      >
-                        <div className="form-control">
-                          <h1 className="text-4xl text-center my-3">
-                            Update A Toy
-                          </h1>
-                          <p className="text-center mb-3">
-                            Please update a toy using the details bellow.
-                          </p>
-
-                          <label className="label">
-                            <span className="label-text">Price</span>
-                          </label>
-                          <input
-                            type="number"
-                            placeholder="Price $"
-                            className="input input-bordered"
-                            name="price"
-                            defaultValue={updateData?.price}
-                          />
-
-                          <label className="label">
-                            <span className="label-text">
-                              Available quantity
-                            </span>
-                          </label>
-                          <input
-                            type="number"
-                            placeholder="Available quantity "
-                            className="input input-bordered"
-                            name="quantity"
-                          />
-                          <label className="label">
-                            <span className="label-text">
-                              Detail description
-                            </span>
-                          </label>
-                          <textarea name="details" className="h-24"></textarea>
-                        </div>
-
-                        <div className="form-control mt-6">
-                          <button className="btn bg-[#4acdd5] border-none w-1/2 rounded-full">
-                            Update
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-              />
-              {/* Same as */}
-              <ToastContainer />
-            </div>
-          </label>
-        </label>
+        <UpdateModal
+          _id={_id}
+          price={price}
+          quantity={quantity}
+          details={details}
+        ></UpdateModal>
       </th>
       <th>
         <button

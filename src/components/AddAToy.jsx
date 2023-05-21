@@ -32,7 +32,8 @@ const AddAToy = () => {
     const sellerName = form.sellerName.value;
     const email = form.email.value;
     const category = selectedValue;
-    const price = form.price.value;
+    let price = form.price.value;
+    price = parseFloat(price);
     const toyRating = rating.toString();
     const quantity = form.quantity.value;
     const details = form.details.value;

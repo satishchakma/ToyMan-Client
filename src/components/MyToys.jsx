@@ -7,17 +7,20 @@ import { AuthContext } from "../providers/AuthProviders";
 
 import { FidgetSpinner } from "react-loader-spinner";
 import MyToysDetails from "./MyToysDetails";
+import UpdateModal from "./UpdateModal";
 
 const MyToys = () => {
   const { user, loading } = useContext(AuthContext);
 
   const [details, setDetails] = useState([]);
+  const [view, setView] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/toys/${user?.email}`)
+    fetch(`http://localhost:5001/toys/${user?.email}&${view}`)
       .then((res) => res.json())
       .then((data) => setDetails(data));
   }, [user, details]);
+
   if (loading) {
     return (
       <div className="flex justify-center">
@@ -34,8 +37,30 @@ const MyToys = () => {
       </div>
     );
   }
+
+  const handleSelectChange = (event) => {
+    let value = parseInt(event.target.value);
+    setView(value);
+  };
   return (
     <div className="container mx-auto my-12">
+      <label className="label">
+        <span className="label-text">Sort by Price</span>
+      </label>
+
+      <select
+        // value={selectedValue}
+        onChange={handleSelectChange}
+        defaultValue={"DEFAULT"}
+        className="select select-bordered my-5"
+        // name="category"
+      >
+        <option value="DEFAULT" disabled>
+          Sort By Price
+        </option>
+        <option value="1">Low to high</option>
+        <option value="-1">High to low </option>
+      </select>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* head */}
@@ -76,6 +101,7 @@ const MyToys = () => {
           </tfoot>
         </table>
       </div>
+      <UpdateModal></UpdateModal>
     </div>
   );
 };
