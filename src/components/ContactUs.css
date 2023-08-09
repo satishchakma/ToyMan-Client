@@ -1,0 +1,43 @@
+.sli-location-pin:before {
+  content: "\e096";
+}
+.sli-screen-smartphone:before {
+  content: "\e010";
+}
+.sli-envelope:before {
+  content: "\e086";
+}
+.sli {
+  font-family: "simple-line-icons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.contact-icon {
+  background-color: #4acdd5;
+  color: #fff;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  line-height: 73px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.contact-from button {
+  background-color: #ff6799 !important;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  width: auto !important;
+  /* max-width: 165px; */
+  padding: 15px 40px;
+  text-align: center;
+  color: #fff;
+
+  display: block;
+}

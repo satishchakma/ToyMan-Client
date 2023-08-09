@@ -63,10 +63,10 @@ const Navbar = () => {
             </NavLink>
           )}
           <NavLink
-            to={`/blogs`}
+            to={`/contact`}
             className={({ isActive }) => (isActive ? "active" : "")}
           >
-            Blogs
+            Contact Us
           </NavLink>
         </div>
 
@@ -172,10 +172,10 @@ const Navbar = () => {
               </li>
               <li className="">
                 <NavLink
-                  to={`/blogs`}
+                  to={`/contact`}
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  Blogs
+                  Contact Us
                 </NavLink>
               </li>
               <li>

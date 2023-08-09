@@ -14,6 +14,7 @@ import Home from "./components/Home.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import SingleCategoryDataDetails from "./components/SingleCategoryDataDetails.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import ContactUs from "./components/ContactUs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,8 +48,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/blogs",
-        element: <Blogs></Blogs>,
+        path: "/contact",
+        element: <ContactUs></ContactUs>,
       },
       {
         path: "/login",
