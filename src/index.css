@@ -108,3 +108,24 @@ h2 {
 .single-toy {
   border-radius: 20px;
 }
+
+/* react tabs css here */
+.react-tabs__tab-list {
+  border-bottom: 0px solid #aaa !important;
+  font-size: 20px;
+  font-weight: 600;
+}
+.react-tabs__tab {
+  margin: 0px 15px;
+
+  border-bottom: 2px solid black !important;
+  margin: 20px;
+  padding: 6px 0px;
+}
+.react-tabs__tab--selected {
+  border: none !important;
+  background-color: #4acdd5 !important;
+  color: white !important;
+  padding: 12px 20px !important;
+  border-radius: 15px !important;
+}
